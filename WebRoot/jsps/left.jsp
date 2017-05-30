@@ -21,27 +21,21 @@
 	<link rel="stylesheet" href="<c:url value='/menu/mymenu.css'/>" type="text/css" media="all">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/jsps/css/left.css'/>">
 <script language="javascript">
-var bar = new Q6MenuBar("bar", "传智播客网上书城");
+/* 下面的表示创建一个手风琴式下拉菜单，var后面的名称必须与第一个参数相同
+	下面的function则表示页面加载完成执行，其中第一行的4表示颜色样式
+	第二行表示+和-号的那个图片，第三行则表示是否支持多个二级分类同时显示
+*/
+var bar = new Q6MenuBar("bar", "网上书城");
 $(function() {
 	bar.colorStyle = 4;
 	bar.config.imgDir = "<c:url value='/menu/img/'/>";
-	bar.config.radioButton=true;
-
-	bar.add("程序设计", "Java Javascript", "/goods/jsps/book/list.jsp", "body");
-	bar.add("程序设计", "JSP", "/goods/jsps/book/list.jsp", "body");
-	bar.add("程序设计", "C C++ VC VC++", "/goods/jsps/book/list.jsp", "body");
+	bar.config.radioButton=false;
 	
-	bar.add("办公室用书", "微软Office", "/goods/jsps/book/list.jsp", "body");
-	bar.add("办公室用书", "计算机初级入门", "/goods/jsps/book/list.jsp", "body");
-	
-	bar.add("图形 图像 多媒体", "Photoshop", "/goods/jsps/book/list.jsp", "body");
-	bar.add("图形 图像 多媒体", "3DS MAX", "/goods/jsps/book/list.jsp", "body");
-	bar.add("图形 图像 多媒体", "网页设计", "/goods/jsps/book/list.jsp", "body");
-	bar.add("图形 图像 多媒体", "Flush", "/goods/jsps/book/list.jsp", "body");
-	
-	bar.add("操作系统/系统开发", "Windows", "/goods/jsps/book/list.jsp", "body");
-	bar.add("操作系统/系统开发", "Linux", "/goods/jsps/book/list.jsp", "body");
-	bar.add("操作系统/系统开发", "系统开发", "/goods/jsps/book/list.jsp", "body");
+	<c:forEach items="${requestScope.parents}" var="parent">
+		<c:forEach items="${parent.children}" var="child">
+			bar.add("${parent.cname}", "${child.cname}", "/goods/jsps/book/list.jsp", "body");
+		</c:forEach>
+	</c:forEach>
 	
 	$("#menu").html(bar.toString());
 });

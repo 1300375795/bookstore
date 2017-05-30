@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -35,17 +35,22 @@
   </head>
   
   <body>
-<h1 style="text-align: center;">传智播客网上书城系统</h1>
+<h1 style="text-align: center;">网上书城系统</h1>
 <div style="font-size: 10pt; line-height: 10px;">
-
-		  <a href="<c:url value='/jsps/user/login.jsp'/>" target="_parent">传智会员登录</a> |&nbsp; 
-		  <a href="<c:url value='/jsps/user/regist.jsp'/>" target="_parent">注册传智会员</a>
-
-		      传智会员：张三&nbsp;&nbsp;|&nbsp;&nbsp;
+<c:choose>
+	<c:when test="${empty sessionScope.sessionUser.loginname }">
+		  <a href="<c:url value='/jsps/user/login.jsp'/>" target="_parent">会员登录</a> |&nbsp; 
+		  <a href="<c:url value='/jsps/user/regist.jsp'/>" target="_parent">注册会员</a>
+	</c:when>
+	<c:otherwise>
+		      会员：${sessionScope.sessionUser.loginname }&nbsp;&nbsp;|&nbsp;&nbsp;
 		  <a href="<c:url value='/jsps/cart/list.jsp'/>" target="body">我的购物车</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-		  <a href="<c:url value='/jsps/order/list.jsp'/>" target="body">我的传智订单</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+		  <a href="<c:url value='/jsps/order/list.jsp'/>" target="body">我的订单</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 		  <a href="<c:url value='/jsps/user/pwd.jsp'/>" target="body">修改密码</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-		  <a href="<c:url value='/jsps/user/login.jsp'/>" target="_parent">退出</a>	
+		  <a href="<c:url value='/UserServlet?method=quit'/>" target="_parent">退出</a>	
+	</c:otherwise>	  
+</c:choose>
+
 
 </div>
   </body>

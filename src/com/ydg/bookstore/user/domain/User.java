@@ -5,6 +5,7 @@ public class User {
 	private String loginname;
 	private String loginpass;
 	private String reloginpass;
+	private String newloginpass;
 	private String email;
 	private String verifyCode;
 	private boolean status;
@@ -13,8 +14,9 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [uid=" + uid + ", loginname=" + loginname + ", loginpass="
-				+ loginpass + ", reloginpass=" + reloginpass + ", email="
-				+ email + ", verifyCode=" + verifyCode + ", status=" + status
+				+ loginpass + ", reloginpass=" + reloginpass
+				+ ", newloginpass=" + newloginpass + ", email=" + email
+				+ ", verifyCode=" + verifyCode + ", status=" + status
 				+ ", activationCode=" + activationCode + "]";
 	}
 
@@ -23,13 +25,14 @@ public class User {
 	}
 
 	public User(String uid, String loginname, String loginpass,
-			String reloginpass, String email, String verifyCode,
-			boolean status, String activationCode) {
+			String reloginpass, String newloginpass, String email,
+			String verifyCode, boolean status, String activationCode) {
 		super();
 		this.uid = uid;
 		this.loginname = loginname;
 		this.loginpass = loginpass;
 		this.reloginpass = reloginpass;
+		this.newloginpass = newloginpass;
 		this.email = email;
 		this.verifyCode = verifyCode;
 		this.status = status;
@@ -54,6 +57,14 @@ public class User {
 
 	public String getLoginpass() {
 		return loginpass;
+	}
+
+	public String getNewloginpass() {
+		return newloginpass;
+	}
+
+	public void setNewloginpass(String newloginpass) {
+		this.newloginpass = newloginpass;
 	}
 
 	public void setLoginpass(String loginpass) {

@@ -26,8 +26,17 @@
 		<servlet-name>VerifyCodeServlet</servlet-name>
 		<servlet-class>cn.itcast.vcode.servlet.VerifyCodeServlet</servlet-class>
 	</servlet>
+  <servlet>
+    <servlet-name>CategoryServlet</servlet-name>
+    <servlet-class>com.ydg.bookstore.category.web.servlet.CategoryServlet</servlet-class>
+  </servlet>
+
 	<servlet-mapping>
 		<servlet-name>VerifyCodeServlet</servlet-name>
 		<url-pattern>/VerifyCodeServlet</url-pattern>
 	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CategoryServlet</servlet-name>
+    <url-pattern>/CategoryServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

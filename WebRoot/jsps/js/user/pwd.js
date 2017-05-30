@@ -54,7 +54,7 @@ function validateLoginpass() {
 			async: false,
 			type: "POST",
 			dataType: "json",
-			data: {method: "validateLoginpass", loginpass: value},
+			data: {method: "ajaxValidateLoginpass", loginpass: value},
 			url: "/goods/UserServlet",
 			success: function(flag) {
 				if(!flag) {
@@ -125,7 +125,7 @@ function validateVerifyCode() {
 			async: false,
 			type: "POST",
 			dataType: "json",
-			data: {method: "validateVerifyCode", verifyCode: value},
+			data: {method:"ajaxValidateVerifyCode", verifyCode: value},
 			url: "/goods/UserServlet",
 			success: function(flag) {
 				if(!flag) {

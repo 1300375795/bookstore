@@ -34,37 +34,47 @@
 			<span id="spanTitle">新用户注册</span>
 		</div>
 		<div id="divBody">
-			<form action="" method="post" id="registForm">
+			<form action='<c:url value="/UserServlet"></c:url>' method="post"
+				id="registForm">
+				<input type="hidden" name="method" value="regist">
 				<table>
 					<tr>
 						<td class="tdTitlt">用户名:</td>
 						<td class="tdInput"><input class="inputClass" type="text"
-							name="loginname" id="loginname" /></td>
-						<td class="tdLabel"><label class="errorClass"></label></td>
+							name="loginname" id="loginname"
+							value="${requestScope.formUser.loginname }" /></td>
+						<td class="tdLabel"><label class="errorClass"
+							id="loginnameError">${requestScope.errors.loginname }</label></td>
 					</tr>
 					<tr>
 						<td class="tdTitlt">登录密码:</td>
 						<td class="tdInput"><input class="inputClass" type="passWord"
-							name="loginpass" id="loginpass" /></td>
-						<td class="tdLabel"><label class="errorClass"></label></td>
+							name="loginpass" id="loginpass"
+							value="${requestScope.formUser.loginpass }" /></td>
+						<td class="tdLabel"><label class="errorClass"
+							id="loginpassError">${requestScope.errors.loginpass }</label></td>
 					</tr>
 					<tr>
 						<td class="tdTitlt">确认密码:</td>
 						<td class="tdInput"><input class="inputClass" type="password"
-							name="reloginpassword" id="reloginpass" /></td>
-						<td class="tdLabel"><label class="errorClass"></label></td>
+							name="reloginpass" id="reloginpass"
+							value="${requestScope.formUser.reloginpass }" /></td>
+						<td class="tdLabel"><label class="errorClass"
+							id="reloginpassError">${requestScope.errors.reloginpass }</label></td>
 					</tr>
 					<tr>
 						<td class="tdTitlt">email:</td>
 						<td class="tdInput"><input class="inputClass" type="text"
-							name="email" id="email" /></td>
-						<td class="tdLabel"><label class="errorClass"></label></td>
+							name="email" id="email" value="${requestScope.formUser.email }" /></td>
+						<td class="tdLabel"><label class="errorClass" id="emailError">${requestScope.errors.email }</label></td>
 					</tr>
 					<tr>
 						<td class="tdTitlt">验证码:</td>
 						<td class="tdInput"><input class="inputClass" type="text"
-							name="verifyCode" id="verifyCode" /></td>
-						<td class="tdLabel"><label class="errorClass"></label></td>
+							name="verifyCode" id="verifyCode"
+							value="${requestScope.formUser.verifyCode }" /></td>
+						<td class="tdLabel"><label class="errorClass"
+							id="verifyCodeError">${requestScope.errors.verifyCode }</label></td>
 					</tr>
 					<tr>
 						<td></td>
