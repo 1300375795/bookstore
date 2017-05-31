@@ -193,7 +193,7 @@ public class BookServlet extends BaseServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	public String loda(HttpServletRequest req, HttpServletResponse resp)
+	public String load(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String bid = req.getParameter("bid");
 		Book book = bookService.load(bid);
