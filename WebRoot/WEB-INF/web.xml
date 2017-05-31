@@ -30,6 +30,16 @@
     <servlet-name>CategoryServlet</servlet-name>
     <servlet-class>com.ydg.bookstore.category.web.servlet.CategoryServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>BookServlet</servlet-name>
+    <servlet-class>com.ydg.bookstore.book.web.servlet.BookServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CartItemServlet</servlet-name>
+    <servlet-class>com.ydg.bookstore.cart.web.servlet.CartItemServlet</servlet-class>
+  </servlet>
+
+
 
 	<servlet-mapping>
 		<servlet-name>VerifyCodeServlet</servlet-name>
@@ -38,5 +48,13 @@
   <servlet-mapping>
     <servlet-name>CategoryServlet</servlet-name>
     <url-pattern>/CategoryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>BookServlet</servlet-name>
+    <url-pattern>/BookServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CartItemServlet</servlet-name>
+    <url-pattern>/CartItemServlet</url-pattern>
   </servlet-mapping>
 </web-app>
