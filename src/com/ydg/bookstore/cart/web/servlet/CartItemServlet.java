@@ -122,12 +122,15 @@ public class CartItemServlet extends BaseServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	public String ListCartItems(HttpServletRequest req, HttpServletResponse resp)
+	public String listCartItems(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String cartItemIds = req.getParameter("cartItemIds");
+		String total = req.getParameter("total");
 		List<CartItem> cartItemList = cartItemService
-				.ListCartItems(cartItemIds);
+				.listCartItems(cartItemIds);
 		req.setAttribute("cartItemList", cartItemList);
+		req.setAttribute("total", total);
+		req.setAttribute("cartItemIds", cartItemIds);
 		return "f:/jsps/cart/showitem.jsp";
 	}
 }

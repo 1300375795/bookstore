@@ -26,7 +26,7 @@ public class BookDao {
 	 * 所有的查询方法的底层依赖
 	 * 
 	 * @param expression
-	 * @param pageCode
+	 * @param pc
 	 * @return
 	 * @throws SQLException
 	 */
@@ -168,7 +168,7 @@ public class BookDao {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	/**
 	 * 通过bid查询相应的Book对象，注意使用mapHangler来查询因为这样子的话可以将cid这个属性
 	 * 封装给Category中而数据库中查出来的其他的属性则封装在book中然后将category赋值给book
@@ -184,5 +184,20 @@ public class BookDao {
 		Category category = CommonUtils.toBean(map, Category.class);
 		book.setCategory(category);
 		return book;
+	}
+
+	/**
+	 * 后台删除二级分类的相应方法实现：通过category的cid查询该分类下面的book的数量
+	 * 1.给出SQL语句
+	 * 2.执行查询操作
+	 * 3.返回查询出来的值
+	 * @param cid
+	 * @return
+	 * @throws SQLException
+	 */
+	public int countBookByCid(String cid) throws SQLException {
+		String sql = "SELECT COUNT(*) FROM t_book WHERE cid=?";
+		Number count = (Number) qr.query(sql, new ScalarHandler(), cid);
+		return count == null ? 0 : count.intValue();
 	}
 }

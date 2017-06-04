@@ -77,7 +77,7 @@
 			updateQuantity(id, Number(quantity) + 1);//调用这个方法参数为ID和增加了1的当前的quantity数量
 		});
 	});
-	
+
 	//异步请求数据库然后修改页面上面的数量以及小计以及总计
 	function updateQuantity(id, quantity) {
 		$.ajax({
@@ -145,6 +145,17 @@
 			});
 		}
 	}
+	
+	//表单的结算按钮提交
+	function jiesuan() {
+		var cartItemArray = new Array();//创建一个数组
+		$(":checkbox[name=checkboxBtn][checked=true]").each(function() {
+			cartItemArray.push($(this).val());//将被选中的按钮的id赋值到这个数组中
+		});
+		$("#cartItemIds").val(cartItemArray.toString());//给表单中的cartItemIds赋值
+		$("#hiddenTotal").val($("#total").text());
+		$("#jieSuanForm").submit();//提交表单
+	}
 </script>
 </head>
 <body>
@@ -204,14 +215,15 @@
 				</tr>
 				<tr>
 					<td colspan="7" align="right"><a
-						href="<c:url value='/jsps/cart/showitem.jsp'/>" id="jiesuan"
+						href="<c:url value='javascript:jiesuan();'/>" id="jiesuan"
 						class="jiesuan"></a></td>
 				</tr>
 			</table>
-			<form id="form1" action="<c:url value='/jsps/cart/showitem.jsp'/>"
+			<form id="jieSuanForm" action="<c:url value='/CartItemServlet'/>"
 				method="post">
-				<input type="hidden" name="cartItemIds" id="cartItemIds" /> <input
-					type="hidden" name="method" value="loadCartItems" />
+				<input type="hidden" name="cartItemIds" id="cartItemIds" /> 
+				<input type="hidden" name="total" id="hiddenTotal" /> 
+				<input type="hidden" name="method" value="listCartItems" />
 			</form>
 		</c:otherwise>
 	</c:choose>

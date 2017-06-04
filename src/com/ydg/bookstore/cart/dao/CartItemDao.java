@@ -103,6 +103,7 @@ public class CartItemDao {
 
 	/**
 	 * 通过cartItemId以及quantity更新数量然后返回一个cartItem对象
+	 * 
 	 * @param cartItemId
 	 * @return
 	 * @throws SQLException
@@ -158,19 +159,18 @@ public class CartItemDao {
 	}
 
 	/**
-	 * 购物车模块的结算功能的实现
-	 * 1.分割cartItemIds字符串成为相应的包含cartItemI的数组
-	 * 2.通过toWhere方法得到SQL语句的后半部分然后拼接前半部分UC恒一个完整的SQL语句
-	 * 3.查询数据库得到相应的List集合
+	 * 购物车模块的结算功能的实现 1.分割cartItemIds字符串成为相应的包含cartItemI的数组
+	 * 2.通过toWhere方法得到SQL语句的后半部分然后拼接前半部分UC恒一个完整的SQL语句 3.查询数据库得到相应的List集合
 	 * 4.通过toCartItemList方法将原先的map转换成CartItem然后返回这个集合
+	 * 
 	 * @param cartItemIdsp
 	 * @return
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
-	public List<CartItem> ListCartItems(String cartItemIds) throws SQLException {
+	public List<CartItem> listCartItems(String cartItemIds) throws SQLException {
 		Object[] cartItemIdsArray = cartItemIds.split(",");
 		String whwereSQL = toWhereSQL(cartItemIdsArray.length);
-		String sql = "SELECT * FROM t_cartitem t,t_book b WHERE c.bid=b.bid AND  "
+		String sql = "SELECT * FROM t_cartitem c,t_book b WHERE c.bid=b.bid AND  "
 				+ whwereSQL;
 		List<Map<String, Object>> mapList = qr.query(sql, new MapListHandler(),
 				cartItemIdsArray);

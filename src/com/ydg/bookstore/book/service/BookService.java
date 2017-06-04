@@ -63,7 +63,7 @@ public class BookService {
 	public PageBean<Book> findByCombination(Book criteria, int pc) {
 		return bookDao.findByCombination(criteria, pc);
 	}
-	
+
 	/**
 	 * 通过bid加载book对象
 	 * @param bid
@@ -72,6 +72,20 @@ public class BookService {
 	public Book load(String bid) {
 		try {
 			return bookDao.findByBid(bid);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	/**
+	 * 后台删除二级分类的配合方法
+	 * 查询出该二级分类下面的book数量
+	 * @param cid
+	 * @return
+	 */
+	public int countBookByCid(String cid) {
+		try {
+			return bookDao.countBookByCid(cid);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

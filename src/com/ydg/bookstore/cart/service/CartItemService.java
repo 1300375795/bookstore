@@ -87,9 +87,9 @@ public class CartItemService {
 	 * @param cartItemIds
 	 * @return
 	 */
-	public List<CartItem> ListCartItems(String cartItemIds) {
+	public List<CartItem> listCartItems(String cartItemIds) {
 		try {
-			return cartItemDao.ListCartItems(cartItemIds);
+			return cartItemDao.listCartItems(cartItemIds);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
