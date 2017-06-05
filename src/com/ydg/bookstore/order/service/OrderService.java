@@ -76,7 +76,7 @@ public class OrderService {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	/**
 	 * 修改订单的状态
 	 * @param oid
@@ -103,4 +103,46 @@ public class OrderService {
 			throw new RuntimeException(e);
 		}
 	}
+
+	/**
+	 * 查询出全部的订单
+	 * @param pc
+	 * @return
+	 */
+	public PageBean<Order> listAll(int pc) {
+		try {
+			JdbcUtils.beginTransaction();
+			PageBean<Order> pb = orderDao.listAll(pc);
+			JdbcUtils.commitTransaction();
+			return pb;
+		} catch (Exception e) {
+			try {
+				JdbcUtils.rollbackTransaction();
+			} catch (Exception e2) {
+			}
+			throw new RuntimeException(e);
+		}
+	}
+	
+	/**
+	 * 跟句订单的状态查询
+	 * @param status
+	 * @param pc
+	 * @return
+	 */
+	public PageBean<Order> listOrderByStatus(int status, int pc) {
+		try {
+			JdbcUtils.beginTransaction();
+			PageBean<Order> pb = orderDao.listOrderByStatus(status, pc);
+			JdbcUtils.commitTransaction();
+			return pb;
+		} catch (Exception e) {
+			try {
+				JdbcUtils.rollbackTransaction();
+			} catch (Exception e2) {
+			}
+			throw new RuntimeException(e);
+		}
+	}
+
 }

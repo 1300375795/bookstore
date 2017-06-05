@@ -48,6 +48,34 @@ public class OrderDao {
 	}
 
 	/**
+	 * 查询全部的订单
+	 * @param pc
+	 * @return
+	 * @throws SQLException
+	 */
+	public PageBean<Order> listAll(int pc) throws SQLException {
+		List<Expression> expreList = new ArrayList<Expression>();
+		PageBean<Order> pageBean = findByCriteria(expreList, pc);
+		return pageBean;
+	}
+	
+	/**
+	 * 通过状态查询 
+	 * @param status
+	 * @param pc
+	 * @return
+	 * @throws SQLException
+	 */
+	public PageBean<Order> listOrderByStatus(int status, int pc)
+			throws SQLException {
+		List<Expression> expreList = new ArrayList<Expression>();
+		Expression exp = new Expression("status", "=", status + "");
+		expreList.add(exp);
+		PageBean<Order> pageBean = findByCriteria(expreList, pc);
+		return pageBean;
+	}
+
+	/**
 	 * 所有查询方法的底层依赖 
 	 * 1.得到每个分页的记录数 
 	 * 2.得到where字句，注意is null情况的 
@@ -67,17 +95,18 @@ public class OrderDao {
 		int ps = PageConstants.ORDER_PAGE_SIZE;
 
 		List<Object> params = new ArrayList<Object>();
-		StringBuilder whereSQL = new StringBuilder(" WHERE 1=1");
-		for (Expression exp : expreList) {
-			whereSQL.append(" AND ").append(" ").append(exp.getName())
-					.append(" ").append(exp.getOperator()).append(" ");
+		StringBuilder whereSQL = new StringBuilder(" WHERE 1=1 ");
+		if (expreList.size() != 0) {
+			for (Expression exp : expreList) {
+				whereSQL.append(" AND ").append(" ").append(exp.getName())
+						.append(" ").append(exp.getOperator()).append(" ");
 
-			if (!"is null".equalsIgnoreCase(exp.getOperator())) {
-				whereSQL.append("?");
-				params.add(exp.getValue());
+				if (!"is null".equalsIgnoreCase(exp.getOperator())) {
+					whereSQL.append("?");
+					params.add(exp.getValue());
+				}
 			}
 		}
-
 		String sql = "SELECT COUNT(*) FROM t_order " + whereSQL;
 		Number number = (Number) qr.query(sql, new ScalarHandler(),
 				params.toArray());

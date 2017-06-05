@@ -40,8 +40,8 @@
 					<td>&nbsp;</td>
 				</tr>
 				<tr style="padding-top: 10px; padding-bottom: 10px;">
-					<td colspan="2"><c:forEach items="${order.orderItemList }"
-							var="orderItem">
+					<td colspan="2">
+					<c:forEach items="${order.orderItemList }" var="orderItem">
 							<a class="link2"
 								href="<c:url value='/BookServlet?method=load&bid=${orderItem.book.bid }'/>">
 								<img border="0" width="70"
@@ -61,7 +61,8 @@
 							<c:when test="${order.status eq 5 }">
 					(已取消)</c:when>
 						</c:choose></td>
-					<td><a href="<c:url value='/OrderServlet?method=load&oid=${order.oid }'/>">查看</a><br /> 
+					<td>
+					<a href="<c:url value='/OrderServlet?method=load&oid=${order.oid }'/>">查看</a><br /> 
 					<c:if	test="${order.status eq 1 }">
 					<a href="<c:url value='/OrderServlet?method=paymentPre&oid=${order.oid }'/>">支付</a>
 					<br />

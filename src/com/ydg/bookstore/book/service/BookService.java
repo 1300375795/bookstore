@@ -76,7 +76,7 @@ public class BookService {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	/**
 	 * 后台删除二级分类的配合方法
 	 * 查询出该二级分类下面的book数量
@@ -86,6 +86,42 @@ public class BookService {
 	public int countBookByCid(String cid) {
 		try {
 			return bookDao.countBookByCid(cid);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 后台添加图书的功能实现
+	 * @param book
+	 */
+	public void saveBook(Book book) {
+		try {
+			bookDao.saveBook(book);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 后台编辑图书的功能实现
+	 * @param book
+	 */
+	public void updateBook(Book book) {
+		try {
+			bookDao.updateBook(book);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 后台刷出图书操作
+	 * @param bid
+	 */
+	public void removeBook(String bid) {
+		try {
+			bookDao.removeBook(bid);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

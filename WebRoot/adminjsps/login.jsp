@@ -35,14 +35,14 @@
 		$("#adminname").val(adminname);
 	});
 </script>
-</head>
+</head> 
 
-<body>
+<body> 
 	<h1>管理员登录页面</h1>
 	<hr />
 	<p style="font-weight: 900; color: red">${msg }</p>
 	<form action="<c:url value='/AdminServlet'/>" method="post"
-		onsubmit="return checkForm()">
+		onsubmit="return checkForm()" target="_top">
 		<input type="hidden" name="method" value="login" /> 管理员账户：<input
 			type="text" name="adminname" value="" id="adminname" /><br /> 密 码：<input
 			type="password" name="adminpwd" id="adminpwd" /><br /> <input

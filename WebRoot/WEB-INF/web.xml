@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee"  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>cn.itcast.filter.EncodingFilter</filter-class>
@@ -42,7 +42,19 @@
   </servlet>
   <servlet>
     <servlet-name>AdminCategoryServlet</servlet-name>
-    <servlet-class>com.ydg.bookstore.admin.category.AdminCategoryServlet</servlet-class>
+    <servlet-class>com.ydg.bookstore.admin.category.web.servlet.AdminCategoryServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminBookServlet</servlet-name>
+    <servlet-class>com.ydg.bookstore.admin.book.web.servlet.AdminBookServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminAddBookServlet</servlet-name>
+    <servlet-class>com.ydg.bookstore.admin.book.web.servlet.AdminAddBookServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminOrderServlet</servlet-name>
+    <servlet-class>com.ydg.bookstore.admin.order.web.servlet.AdminOrderServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>VerifyCodeServlet</servlet-name>
@@ -71,5 +83,17 @@
   <servlet-mapping>
     <servlet-name>AdminCategoryServlet</servlet-name>
     <url-pattern>/admin/AdminCategoryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminBookServlet</servlet-name>
+    <url-pattern>/admin/AdminBookServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminAddBookServlet</servlet-name>
+    <url-pattern>/admin/AdminAddBookServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminOrderServlet</servlet-name>
+    <url-pattern>/admin/AdminOrderServlet</url-pattern>
   </servlet-mapping>
 </web-app>

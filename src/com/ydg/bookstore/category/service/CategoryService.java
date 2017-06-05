@@ -79,15 +79,29 @@ public class CategoryService {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	/**
 	 * 通过cid得到这个分类所拥有的子分类的个数
 	 * @param cid
 	 * @return
 	 */
-	public int conutChildCategoryByCid(String cid) {
+	public int conutChildCategoryByPid(String pid) {
 		try {
-			return categoryDao.conutChildCategoryByCid(cid);
+			return categoryDao.conutChildCategoryByPid(pid);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	
+	/**
+	 * 通过pid查询某个一级分类下面的全部的子分类
+	 * @param pid
+	 * @return
+	 */
+	public List<Category> listChildCategiryByPid(String pid) {
+		try {
+			return categoryDao.listChildCategiryByPid(pid);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

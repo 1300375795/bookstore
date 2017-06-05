@@ -68,9 +68,9 @@ public class CategoryDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	private List<Category> finaByParent(String pid) throws SQLException {
+	public List<Category> listChildCategiryByPid(String pid) throws SQLException {
 		// 查询出某个pid的全部子分类
-		String sql = "SELECT * FROM t_category WHERE pid=?";
+		String sql = "SELECT * FROM t_category WHERE pid=? ORDER BY orderBy";
 		List<Map<String, Object>> mapList = qr.query(sql, new MapListHandler(),
 				pid);
 		// 将查出来的全部的子分类封装起来由于当前子分类没有接下来的子分类所以只有四个属性cid、cname、desx、parent
@@ -92,7 +92,7 @@ public class CategoryDao {
 		// 遍历全部的parents给起的children属性赋值
 		for (Category parent : parents) {
 			// 通过当前parent的cid(即子分类的pid)查询出全部的子分类
-			List<Category> children = finaByParent(parent.getCid());
+			List<Category> children = listChildCategiryByPid(parent.getCid());
 			parent.setChildren(children);
 		}
 
@@ -191,9 +191,10 @@ public class CategoryDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int conutChildCategoryByCid(String pid) throws SQLException {
+	public int conutChildCategoryByPid(String pid) throws SQLException {
 		String sql = "SELECT COUNT(*) FROM t_category WHERE pid=?";
 		Number number = (Number) qr.query(sql, new ScalarHandler(), pid);
 		return number == null ? 0 : number.intValue();
 	}
+
 }

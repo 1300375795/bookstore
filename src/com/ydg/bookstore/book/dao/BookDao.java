@@ -178,10 +178,18 @@ public class BookDao {
 	 * @throws SQLException
 	 */
 	public Book findByBid(String bid) throws SQLException {
-		String sql = "SELECT * FROM t_book WHERE bid=?";
+		String sql = "SELECT * FROM t_book b, t_category c WHERE b.cid=c.cid AND b.bid=?";
 		Map<String, Object> map = qr.query(sql, new MapHandler(), bid);
 		Book book = CommonUtils.toBean(map, Book.class);
 		Category category = CommonUtils.toBean(map, Category.class);
+
+		if (map.get("pid") != null) {
+			String pid = (String) map.get("pid");
+			Category parent = new Category();
+			parent.setCid(pid);
+			category.setParent(parent);
+		}
+
 		book.setCategory(category);
 		return book;
 	}
@@ -199,5 +207,54 @@ public class BookDao {
 		String sql = "SELECT COUNT(*) FROM t_book WHERE cid=?";
 		Number count = (Number) qr.query(sql, new ScalarHandler(), cid);
 		return count == null ? 0 : count.intValue();
+	}
+
+	/**
+	 * 后台添加图书的功能实现
+	 * 1.给出17个参数的SQL语句
+	 * 2.给出17个参数
+	 * 3.执行SQL语句
+	 * @param book
+	 * @throws SQLException
+	 */
+	public void saveBook(Book book) throws SQLException {
+		String sql = "INSERT INTO t_book(bid,bname,author,price,currPrice,discount,"
+				+ "press,publishtime,edition,pageNum,wordNum,printtime,"
+				+ "booksize,paper,cid,image_w,image_b)  "
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] params = { book.getBid(), book.getBname(), book.getAuthor(),
+				book.getPrice(), book.getCurrPrice(), book.getDiscount(),
+				book.getPress(), book.getPublishtime(), book.getEdition(),
+				book.getPageNum(), book.getWordNum(), book.getPrinttime(),
+				book.getBooksize(), book.getPaper(),
+				book.getCategory().getCid(), book.getImage_w(),
+				book.getImage_b() };
+		qr.update(sql, params);
+	}
+
+	/**
+	 * 后台编辑图书的更能实现
+	 * @param book
+	 * @throws SQLException
+	 */
+	public void updateBook(Book book) throws SQLException {
+		String sql = "UPDATE t_book SET  bname=?,author=?,price=?,currPrice=?,discount=?,press=?,"
+				+ "publishtime=?,edition=?,pageNum=?,wordNum=?,printtime=?,booksize=?,paper=?,cid=?  WHERE bid=?";
+		Object[] params = { book.getBname(), book.getAuthor(), book.getPrice(),
+				book.getCurrPrice(), book.getDiscount(), book.getPress(),
+				book.getPublishtime(), book.getEdition(), book.getPageNum(),
+				book.getWordNum(), book.getPrinttime(), book.getBooksize(),
+				book.getPaper(), book.getCategory().getCid(), book.getBid() };
+		qr.update(sql, params);
+	}
+
+	/**
+	 *后台删除图书功能实现
+	 * @param bid
+	 * @throws SQLException
+	 */
+	public void removeBook(String bid) throws SQLException {
+		String sql = "DELETE FROM t_book WHERE bid=?";
+		qr.update(sql, bid);
 	}
 }

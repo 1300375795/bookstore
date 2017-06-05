@@ -218,7 +218,7 @@ public class OrderServlet extends BaseServlet {
 		req.setAttribute("code", "success");
 		req.setAttribute("msg", "订单已经成功确认收货");
 		return "f:/jsps/msg.jsp";
-	}
+	} 
 
 	/**
 	 * 支付准备工作返回订单的总金额以及订单的单号
